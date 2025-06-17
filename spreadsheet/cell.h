@@ -19,18 +19,22 @@ public:
     Value GetValue() const override;
     std::string GetText() const override;
     std::vector<Position> GetReferencedCells() const override;
-
+    void SetReferenced();
+    void DeleteReferenced();
     bool IsReferenced() const;
+protected:
+    const Sheet& GetSheet() const{
+        return sheet_;
+    }
 
 private:
     class Impl;
     class EmptyImpl;
     class TextImpl;
     class FormulaImpl;
+  
 
     std::unique_ptr<Impl> impl_;
-
-    // Добавьте поля и методы для связи с таблицей, проверки циклических 
-    // зависимостей, графа зависимостей и т. д.
-
+    Sheet& sheet_;//�������� ������ ������, ����� ����� ���������?
+    bool is_referenced;
 };

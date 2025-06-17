@@ -39,14 +39,18 @@ public:
     enum class Category {
         Ref,    // ссылка на ячейку с некорректной позицией
         Value,  // ячейка не может быть трактована как число
-        Div0,  // в результате вычисления возникло деление на ноль
+        Arithmetic,  // в результате вычисления возникло деление на ноль
     };
 
-    FormulaError(Category category);
+    FormulaError(Category category):category_(category) {}
 
-    Category GetCategory() const;
+    Category GetCategory() const {
+        return category_;
+    }
 
-    bool operator==(FormulaError rhs) const;
+    bool operator==(FormulaError rhs) const {
+        return this->category_ == rhs.category_;
+    };
 
     std::string_view ToString() const;
 
@@ -76,6 +80,7 @@ public:
     using std::runtime_error::runtime_error;
 };
 
+class SheetInterface;
 class CellInterface {
 public:
     // Либо текст ячейки, либо значение формулы, либо сообщение об ошибке из
