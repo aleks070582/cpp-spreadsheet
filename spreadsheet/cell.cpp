@@ -123,14 +123,7 @@ void Cell::Set(std::string text) {
         impl_ = std::make_unique<Cell::FormulaImpl>(text.substr(1),sheet_);
     }
     else {
-        //если число
-    //    if (std::optional<double> number = IsDouble(text); number.has_value()) {
-    //        impl_ = std::make_unique<Cell::NumberImpl>(number.value());
-    //    }
-    //    else {
-            // обычный текст
             impl_ = std::make_unique<Cell::TextImpl>(text);
-      //  }
     }
 }
 void Cell::Clear() {
