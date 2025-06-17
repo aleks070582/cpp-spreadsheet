@@ -6,34 +6,7 @@
 #include <optional>
 
 
-std::string CleanText(const std::string& text) {
-    size_t start = 0;
-    if (!text.empty() && text[0] == '\'') {
-        start = 1;  // убираем апостроф в начале
-    }
 
-    std::string result;
-    bool escape = false;
-
-    for (size_t i = start; i < text.size(); ++i) {
-        if (escape) {
-            // сюда можно добавить обработку специальных символов, например '\n' -> '\n'
-            // но если экранирование простое, просто добавляем символ как есть
-            result += text[i];
-            escape = false;
-        }
-        else {
-            if (text[i] == '\\') {
-                escape = true;  // следующий символ экранирован
-            }
-            else {
-                result += text[i];
-            }
-        }
-    }
-
-    return result;
-}
 class Cell::Impl {
 public:
     virtual CellInterface::Value GetValue() const = 0;
